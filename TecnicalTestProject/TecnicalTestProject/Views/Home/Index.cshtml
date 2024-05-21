@@ -1,0 +1,239 @@
+﻿@using Model.ViewModels
+@model MeetingMinutesMasterVm;
+
+<div class="card">
+    <div class="card-body">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Meeting Minutes
+                </div>
+            <form id="form-select-option" method="post" asp-action="SelectOption">
+                <div class="form-group">
+                    @foreach (var option in Model.CustomerTypeList)
+                    {
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SelectedOption" id="option_@option.Id" value="@option.Id" @(Model.SelectedOption == option.Id.ToString() ? "checked" : " ")>
+                            <label class="form-check-label" for="option_@option.Id">
+                                @option.Name
+                            </label>
+                        </div>
+                    }
+                    <hr />
+                </div>
+            </form>
+            </div>
+        </div>
+     
+      <form id="n" asp-action="create" method="post">
+        <div class="card">
+            <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+
+
+                            @if (Model.SelectedOption == "1")
+                            {
+                                <div class="row mb-3">
+                                    <label for="inputName" class="col-sm-4 col-form-label">Customer Name</label>
+                                    <div class="col-sm-8">
+                                        <select asp-for="CorporateCustomerId" class="form-select" asp-items="@ViewBag.SelectOptionValue">
+                                            <option disabled selected>-Select Customer-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row mb-3">
+                                    <label for="inputName" class="col-sm-4 col-form-label">Customer Name</label>
+                                    <div class="col-sm-8">
+                                        <select asp-for="IndividualCustomerId" class="form-select" asp-items="@ViewBag.SelectOptionValue">
+                                            <option disabled selected>-Select Customer-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-4 col-form-label">Date</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <input type="date" class="form-control" asp-for="MeetingDate" />
+                                        </div>
+                                        <div class="col-5">
+                                            
+                                            <input type="time" class="form-control" asp-for="MeetingTime" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-4 col-form-label">Meeting Place<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="Place" />
+                                   
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-4 col-form-label">Attends From Client Side<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="ClientSide" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-4 col-form-label">Attends From Host Side<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="HostSide" />
+                                </div>
+                            </div>
+                            </div>
+                        
+                        <div class="col-6">
+                            <div class="row mb-3">
+                                <label  class="col-sm-4 col-form-label">Meeting Agenda<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea type="text" class="form-control" asp-for="Agenda" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label  class="col-sm-4 col-form-label">Meeting Discussion<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea asp-for="Discussion" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label">Meeting Decision<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea asp-for="Decision" class="form-control"  rows="2"></textarea>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div id="meetingMinutesDetailsId">
+                        @for (int i = 0; i < Model.MeetingMinutesDetails.Count; i++)
+                        {
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="row mb-3">
+                                        <label for="inputName" class="col-sm-3 col-form-label" style="font-size: 13px;">Interested Product/Service</label>
+                                        <div class="col-sm-9">
+                                            <select id="unitId" asp-for="@Model.MeetingMinutesDetails[i].ProductsServiceId" class="form-select" asp-items="@Model.ProductServiceList" onchange="getUnit()">
+                                                <option disabled selected>-Select Customer-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="inputName" class="col-sm-3 col-form-label" style="font-size: 13px;">Quantity</label>
+                                        <div class="col-sm-9">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" asp-for="@Model.MeetingMinutesDetails[i].Quantity" />
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <label for="inputName" class="col-sm-4 col-form-label" style="font-size: 13px;">Unit</label>
+                                                        <div class="col-8">
+                                                            <input type="text" id="productUnit" class="form-control" disabled />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        }
+                    </div>
+                  
+                    <button type="button" class="btn btn-secondary w-25" onclick="addDetail(this)">Add</button>
+                    
+                </div>
+               
+               
+            </div>
+      
+     
+      <div class="card mb-3">
+          <div class="card-body">
+                <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                </table>
+          </div>
+      </div>
+            <button type="submit" class="btn btn-secondary w-25">Submit</button>
+      </form>
+    </div>
+   
+</div>
+
+@section Scripts
+{
+    <script src="~/js/MeetingMinuteMaster.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('input[type=radio][name=SelectedOption]').change(function () {
+                $('#form-select-option').submit();
+            });
+        });
+
+        function getUnit() {
+            var unitId = document.getElementById("unitId").value;
+            if (unitId) {
+                $.ajax({
+                    url: '@Url.Action("GetProductServiceUnit", "Home")',
+                    type: 'GET',
+                    data: { id: unitId },
+                    success: function (unit) {
+                        $("#productUnit").val(unit);
+                    }
+                });
+            } else {
+                $("#productUnit").val('');
+            }
+        }
+
+        function addDetail() {
+            // const index = document.querySelectorAll('#meetingMinutesDetailsId div').length;
+            // const newRow = `
+                               
+            //         `;
+            // document.getElementById('saleDetails').insertAdjacentHTML('beforeend', newRow);
+
+            var div = document.getElementById('#meetingMinutesDetailsId');
+            var div2 = div.getElementByTagName('div');
+            var divOuterHtml = div2[div3.length - 1].outerHTML;
+
+            var newDiv = div.inertRow();
+            newDiv.innerHTML = rowOuterHtml;
+        }
+
+        function removeDetail(button) {
+            button.closest('tr').remove();
+        }
+
+
+        
+    </script>
+}

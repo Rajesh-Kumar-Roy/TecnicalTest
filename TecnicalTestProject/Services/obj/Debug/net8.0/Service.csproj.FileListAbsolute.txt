@@ -1,0 +1,17 @@
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Service.deps.json
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Service.dll
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Service.pdb
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Model.dll
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Repository.dll
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Repository.pdb
+D:\C# project\TecnicalTestProject\Services\bin\Debug\net8.0\Model.pdb
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.csproj.AssemblyReference.cache
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.AssemblyInfoInputs.cache
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.AssemblyInfo.cs
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.csproj.CoreCompileInputs.cache
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.csproj.Up2Date
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.dll
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\refint\Service.dll
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\Service.pdb
+D:\C# project\TecnicalTestProject\Services\obj\Debug\net8.0\ref\Service.dll
